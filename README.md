@@ -1,5 +1,5 @@
-# unbound-pihole-docker
-A combination of Unbound and Pi-hole in a docker container for the raspberry pi
+# Unbound and pi-hole in a docker-compose enviroment.
+A combination of Unbound and Pi-hole in a pair of docker containers communicating over a private network - for the Raspberry Pi.  I run this on raspi 3B and 3B+ devices, though I imagine that it would work on a 4B as well.
 
 Basically, I've followed the steps from [Pi-hole Unbound Docker Setup on a Raspberry Pi](https://www.xfelix.com/2020/09/pihole-unbound-docker-setup-on-raspberry-pi/)
 
