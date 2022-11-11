@@ -52,3 +52,19 @@ If you have not added yourself to the docker group with `sudo usermod -aG docker
 
 `docker-compose up -d pihole`
 
+### Adding to telegraf
+
+You can still pull stats data into telegraf using the inputs.exec tool.  THe format looks like this:
+
+```
+[[inputs.exec]]
+  commands = ["/bin/sh -c \"docker exec unbound /opt/unbound/sbin/unbound-control stats | grep -v thread0 | sed 's/total\\.//'\""]
+  name_override = "unbound"
+  data_format = "logfmt"
+  data_type = "float"
+  interval = "10m"
+```
+
+You must also add telegraf to the docker group, like so `sudo usermod -aG docker telegraf`
+
+
