@@ -29,17 +29,26 @@ If you have not added yourself to the docker group with `sudo usermod -aG docker
 ### Troubleshooting
 
 `docker ps`
+
 `docker inspect <container name, such as pihole or unbound>`
+
 `docker logs pihole`
 
 ### Maintenance and Update
 
 `docker pull pihole/pihole:latest`
+
 `docker pull mvance/unbound-rpi:latest`
+
 `docker stop pihole`
+
 `docker stop unbound`
+
 `docker rm pihole`
+
 `docker rm unbound`
+
 `docker-compose up -d unbound`
+
 `docker-compose up -d pihole`
 
