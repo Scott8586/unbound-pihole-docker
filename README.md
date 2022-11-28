@@ -26,7 +26,7 @@ If you have not added yourself to the docker group with `sudo usermod -aG docker
 3. `dig www.google.com @127.0.0.1 -p 53`
 4. Also access http://<raspi_ipaddr>/admin/index.php to configure pihole blocklist, etc.
 
-### Troubleshooting
+### Alpine 3.13, Raspberry Pi 3/4, and libseccomp2
 
 If you run into the following error:
 
@@ -38,7 +38,7 @@ pihole     | s6-supervise s6-linux-init-shutdownd: fatal: unable to iopause: Ope
 pihole     | s6-linux-init-hpr: fatal: unable to reboot(): Operation not permitted
 ```
 
-You need to add the backported version of libseccomp2, see [Fix/Workaround - libseccomp2 and Alpine 3.13 - Installing Raspbian Docker 19.04+ on Raspberry Pi 4 Buster](https://blog.samcater.com/fix-workaround-rpi4-docker-libseccomp2-docker-20/)
+You need to add the backported version of libseccomp2 in order for docker to start the pihole container, see [Fix/Workaround - libseccomp2 and Alpine 3.13 - Installing Raspbian Docker 19.04+ on Raspberry Pi 4 Buster](https://blog.samcater.com/fix-workaround-rpi4-docker-libseccomp2-docker-20/)
 
 In short the commands are:
 
@@ -52,6 +52,8 @@ echo 'deb http://httpredir.debian.org/debian buster-backports main contrib non-f
 sudo apt update
 sudo apt install libseccomp2 -t buster-backports
 ```
+
+### Troubleshooting
 
 `docker ps`
 
