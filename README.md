@@ -28,7 +28,33 @@ If you have not added yourself to the docker group with `sudo usermod -aG docker
 
 ### Troubleshooting
 
+If you run into the following error:
+
+```
+pihole     | s6-svscan: warning: unable to iopause: Operation not permitted
+pihole     | s6-svscan: warning: executing into .s6-svscan/crash
+pihole     | s6-svscan crashed. Killing everything and exiting.
+pihole     | s6-supervise s6-linux-init-shutdownd: fatal: unable to iopause: Operation not permitted
+pihole     | s6-linux-init-hpr: fatal: unable to reboot(): Operation not permitted
+```
+
+You need to add the backported version of libseccomp2, see [Fix/Workaround - libseccomp2 and Alpine 3.13 - Installing Raspbian Docker 19.04+ on Raspberry Pi 4 Buster](https://blog.samcater.com/fix-workaround-rpi4-docker-libseccomp2-docker-20/)
+
+In short the commands are:
+
+```
+# Get signing keys to verify the new packages, otherwise they will not install
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 04EE7237B7D453EC 648ACFD622F3D138
+
+# Add the Buster backport repository to apt sources.list
+echo 'deb http://httpredir.debian.org/debian buster-backports main contrib non-free' | sudo tee -a /etc/apt/sources.list.d/debian-backports.list
+
+sudo apt update
+sudo apt install libseccomp2 -t buster-backports
+```
+
 `docker ps`
+
 
 `docker inspect <container name, such as pihole or unbound>`
 
