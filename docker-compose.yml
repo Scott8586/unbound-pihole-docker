@@ -17,18 +17,18 @@ services:
       dns_net:
         ipv4_address: 172.20.0.6
     ports:
-    - "53:53/tcp"
-    - "53:53/udp"
-    - "80:80/tcp"
-    - "443:443/tcp"
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
     environment:
-    - 'TZ=America/Los_Angeles'
-    - WEBPASSWORD=${PIHOLE_PASSWORD}
-    - 'DNS1=172.20.0.7#5053'
-    - 'DNS2=no'
+      - TZ=America/Los_Angeles
+      - WEBPASSWORD=${PIHOLE_PASSWORD}
+      - 'DNS1=172.20.0.7#5053'
+      - 'DNS2=no'
     volumes:
-    - '/opt/docker/unbound-pihole/pihole/:/etc/pihole/'
-    - '/opt/docker/unbound-pihole/dnsmasq.d/:/etc/dnsmasq.d/'
+      - /opt/docker/unbound-pihole/pihole/:/etc/pihole/
+      - /opt/docker/unbound-pihole/dnsmasq.d/:/etc/dnsmasq.d/
     restart: unless-stopped
   unbound:
     container_name: unbound
@@ -37,12 +37,12 @@ services:
       dns_net:
         ipv4_address: 172.20.0.7
     volumes:
-    - /opt/docker/unbound-pihole/unbound:/opt/unbound/etc/unbound
+      - /opt/docker/unbound-pihole/unbound:/opt/unbound/etc/unbound
     ports:
-    - "5053:5053/tcp"
-    - "5053:5053/udp"
-#    - "8953:8953/tcp"
-#    - "8953:8953/udp"
+      - "5053:5053/tcp"
+      - "5053:5053/udp"
+#      - "8953:8953/tcp"
+#      - "8953:8953/udp"
     healthcheck:
       disable: true
     restart: unless-stopped
